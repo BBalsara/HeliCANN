@@ -5,10 +5,10 @@ import time
 
 # Hyperparameters
 DIFF = True
-LEARNING_RATE = 0.00001
+LEARNING_RATE = 0.000006
 EPOCHS = 10000
 WEIGHT_SPREAD = 0.02
-ALPHA = 0.0001
+ALPHA = 0.1
 
 
 tf.config.run_functions_eagerly(True) # This is to make sure that the code runs in eager mode
@@ -19,15 +19,15 @@ class NN(tf.keras.Model):
 
 
         # Define weights and biases        
-        self.w11 = tf.Variable(tf.cast(WEIGHT_SPREAD*np.random.rand(1)[0], dtype=tf.float32), trainable=True)
+        self.w11 = tf.Variable(tf.cast(0., dtype=tf.float32), trainable=False)
         self.w12 = tf.Variable(tf.cast(WEIGHT_SPREAD*np.random.rand(1)[0], dtype=tf.float32), trainable=True)
         self.w13 = tf.Variable(tf.cast(WEIGHT_SPREAD*np.random.rand(1)[0], dtype=tf.float32), trainable=True)
-        self.w21 = tf.Variable(tf.cast(WEIGHT_SPREAD*np.random.rand(1)[0], dtype=tf.float32), trainable=True)
+        self.w21 = tf.Variable(tf.cast(0., dtype=tf.float32), trainable=False)
         self.w22 = tf.Variable(tf.cast(WEIGHT_SPREAD*np.random.rand(1)[0], dtype=tf.float32), trainable=True)
         self.w23 = tf.Variable(tf.cast(WEIGHT_SPREAD*np.random.rand(1)[0], dtype=tf.float32), trainable=True)
         self.w31 = tf.Variable(tf.cast(WEIGHT_SPREAD*np.random.rand(1)[0], dtype=tf.float32), trainable=True)
-        self.w32 = tf.Variable(tf.cast(WEIGHT_SPREAD*np.random.rand(1)[0], dtype=tf.float32), trainable=True)
-        self.w33 = tf.Variable(tf.cast(WEIGHT_SPREAD*np.random.rand(1)[0], dtype=tf.float32), trainable=True)
+        self.w32 = tf.Variable(tf.cast(0., dtype=tf.float32), trainable=False)
+        self.w33 = tf.Variable(tf.cast(0., dtype=tf.float32), trainable=False)
 
 
 
@@ -47,7 +47,7 @@ def loss(y_est, y, weights):
     y = tf.cast(y, dtype=tf.float32)
     # Compute loss
     l = tf.norm(y_est - y) * 180 / np.pi
-    l += tf.norm(weights, 1) * ALPHA
+    # l += tf.norm(weights, 1) * ALPHA
     return l    
 
 def nn(data, mode):

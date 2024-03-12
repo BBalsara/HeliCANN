@@ -3,27 +3,28 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 from Dom_Func_Network import NN as NN_Dom
 from Dom_Func_Network import getData_Dom
-from Residue_Network import NN as NN_Res
-from Residue_Network import getData
+from Residue_Network_Cyc import NN as NN_Res_cyc
+from Residue_Network_Cyc import getData
+from Residue_Network_Col import NN as NN_Res_col
 
 if __name__ == "__main__":
 
     # Load the models
     Col_DOM_Model = NN_Dom(1, 1)
-    Col_DOM_Model.load_weights('./policies/' + 'COLL_DOM_Mar-11-2024_1900')
+    Col_DOM_Model.load_weights('./policies/' + 'COLL_DOM_Mar-12-2024_1600')
     weights_d = Col_DOM_Model.get_weights()
-    print("Model Wights: ", weights_d)
+    print("Col_Dom_Model Wights: ", weights_d)
 
 
-    Col_RES_Model = NN_Res(2, 1)
-    Col_RES_Model.load_weights('./policies/' + 'COLL_Mar-11-2024_1826')
+    Col_RES_Model = NN_Res_col(2, 1)
+    Col_RES_Model.load_weights('./policies/' + 'COLL_Mar-12-2024_1553')
     weights_r = Col_RES_Model.get_weights()
-    print("Model Wights: ", weights_r)
+    print("Col_Res_Model Wights: ", weights_r)
 
-    Cyc_RES_Model = NN_Res(2, 1)
-    Cyc_RES_Model.load_weights('./policies/' + 'CYC_Mar-11-2024_1842')
+    Cyc_RES_Model = NN_Res_cyc(2, 1)
+    Cyc_RES_Model.load_weights('./policies/' + 'CYC_Mar-12-2024_1530')
     weights_r = Cyc_RES_Model.get_weights()
-    print("Model Wights: ", weights_r)
+    print("Cyc_Res_Model Wights: ", weights_r)
 
 
 

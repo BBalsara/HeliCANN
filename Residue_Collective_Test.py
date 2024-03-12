@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from Residue_Network import NN
-from Residue_Network import getData
+from Residue_Network_Cyc import NN
+from Residue_Network_Cyc import getData
 
 if __name__ == "__main__":
 

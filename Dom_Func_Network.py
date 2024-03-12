@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 # Hyperparameters
 DIFF = True
 LEARNING_RATE = 0.00001
-EPOCHS = 50000
+EPOCHS = 15000
 WEIGHT_SPREAD = 0.01
-ALPHA = 0.0001
+ALPHA = 0.1
 
 tf.config.run_functions_eagerly(True) # This is to make sure that the code runs in eager mode
 
@@ -39,7 +39,7 @@ def loss(y_est, y, weights):
     y = tf.cast(y, dtype=tf.float32)
     # Compute loss
     l = tf.norm(y_est - y) * 180 / np.pi
-    l += tf.norm(weights, 1) * ALPHA
+    # l += tf.norm(weights, 1) * ALPHA
     return l    
 
 def nn(data, mode):
