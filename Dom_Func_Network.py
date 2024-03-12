@@ -35,11 +35,11 @@ class NN(tf.keras.Model):
         output = inter24 + inter25
         return output
 
-def loss(y_est, y):
+def loss(y_est, y, weights):
     y = tf.cast(y, dtype=tf.float32)
     # Compute loss
     l = tf.norm(y_est - y) * 180 / np.pi
-
+    l += tf.norm(weights, 1) * ALPHA
     return l    
 
 def nn(data, mode):
@@ -62,7 +62,7 @@ def nn(data, mode):
     def train_step(x, y):
         with tf.GradientTape() as tape:
             y_est = nn_model.call(x)
-            current_loss = loss(y_est, y)
+            current_loss = loss(y_est, y, nn_model.trainable_variables)
         grads = tape.gradient(current_loss, nn_model.trainable_variables)
         optimizer.apply_gradients(zip(grads, nn_model.trainable_variables))
         train_loss(current_loss)
